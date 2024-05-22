@@ -6,13 +6,14 @@
     <link href="./output.css" rel="stylesheet" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
-    <main class="bg-[#38404B] w-screen h-screen py-20 px-32">
+  <body class="bg-[#38404B]" >
+    <main class="bg-[#38404B] w-screen h-full py-20 px-32">
       <div class="formContainer flex justify-center">
-        <form action="" class="relative">
+        <form action="" id="toDoForm" class="relative">
           <input
             type="text"
-            class="bg-[#38404B] rounded-2xl w-[580px] h-[60px] boxShadow px-9 py-4 text-[#94ADCF]/70"
+            name="toDoInput"
+            class=" bg-[#38404B] border-none rounded-2xl w-[580px] h-[60px] boxShadow px-9 py-4 text-[#94ADCF]/70"
             placeholder="Add new task"
           />
           <button type="submit" class="absolute top-[25%] right-[2%]">
@@ -34,22 +35,24 @@
           </button>
         </form>
       </div>
-      <div class="toDoContainer mt-24">
+      <div class="toDoContainer mt-24 flex flex-wrap justify-between gap-8">
         <div
-          class="toDo w-[450px] h-[60px] toDoShadow rounded-2xl flex items-center px-6"
+          class="toDo w-[450px] h-[60px] toDoShadow rounded-2xl flex items-center gap-7 px-6 "
         >
-          <div class="tolsContainer flex gap-2">
+          <div class="tolsContainer flex gap-2 ">
             <div
-              class="delet w-4 h-4 border-solid border-[#CD4439] border-[2.5px] rounded-full hover:bg-[#CD4439]"
+              class="delet w-4 h-4 border-solid border-[#CD4439] border-[2.5px] rounded-full hover:bg-[#CD4439]/50"
             ></div>
             <div
-              class="acpert w-4 h-4 border-solid border-[#72B896] border-[2.5px] rounded-full hover:bg-[#72B896]"
+              class="acpert w-4 h-4 border-solid border-[#72B896] border-[2.5px] rounded-full hover:bg-[#72B896]/50"
             ></div>
           </div>
-          <p class="">lorem</p>
+          <p class="text-[18px] text-[#94ADCF]">lorem</p>
         </div>
       </div>
-      <div></div>
+      
     </main>
+
+    <script src="./app.js"></script>
   </body>
 </html>
