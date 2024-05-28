@@ -6,14 +6,14 @@
     <link href="./output.css" rel="stylesheet" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body class="bg-[#38404B]" >
-    <main class="bg-[#38404B] w-screen h-full py-20 px-32">
+  <body class="bg-[#38404B] overflow-x-hidden" >
+    <main class="bg-[#38404B] w-screen h-full py-20 px-32 overflow-hidden">
       <div class="formContainer flex justify-center">
         <form action="" id="toDoForm" class="relative">
           <input
             type="text"
             name="toDoInput"
-            class=" bg-[#38404B] border-none rounded-2xl w-[580px] h-[60px] boxShadow px-9 py-4 text-[#94ADCF]/70"
+            class=" bg-[#38404B] border-none rounded-2xl w-[50vw] h-[60px] boxShadow px-9 py-4 text-[#94ADCF]/70"
             placeholder="Add new task"
           />
           <button type="submit" class="absolute top-[25%] right-[2%]">
@@ -35,8 +35,8 @@
           </button>
         </form>
       </div>
-      <div class="toDoContainer mt-24 flex flex-wrap justify-between gap-8">
-        <div
+      <div class="toDoContainer mt-24 flex flex-wrap justify-between gap-8 ">
+        <!-- <div
           class="toDo w-[450px] h-[60px] toDoShadow rounded-2xl flex items-center gap-7 px-6 "
         >
           <div class="tolsContainer flex gap-2 ">
@@ -48,7 +48,7 @@
             ></div>
           </div>
           <p class="text-[18px] text-[#94ADCF]">lorem</p>
-        </div>
+        </div> -->
       </div>
       
     </main>

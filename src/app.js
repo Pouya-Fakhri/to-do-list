@@ -1,19 +1,32 @@
 const toDoForm = document.querySelector("#toDoForm");
-let toDos = [];
-let toDoContainer = document.querySelector('.toDoContainer')
+let toDos = JSON.parse(localStorage.getItem("toDosStorage")) || [];
+let toDoContainer = document.querySelector(".toDoContainer");
 toDoForm.addEventListener("submit", (e) => {
-  e.preventDefault()
   const newToDo = {
     title: e.target.toDoInput.value,
     finished: false,
-    id: generateUiId(),
+    id: generateUsrId(),
   };
   toDos.push(newToDo);
-  console.log(toDos)
-  localStorage.setItem('toDosStorage',JSON.stringify(toDos));
-  console.log(JSON.parse(localStorage.getItem('toDosStorage')))
-  renderInUi(JSON.parse(localStorage.getItem('toDosStorage')),toDoContainer)
+  localStorage.setItem("toDosStorage", JSON.stringify(toDos));
+  e.preventDefault();
+  renderInUi(JSON.parse(localStorage.getItem("toDosStorage")), toDoContainer);
   e.target.toDoInput.value = "";
+});
+renderInUi(JSON.parse(localStorage.getItem("toDosStorage")), toDoContainer);
+toDoContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delet")) {
+    localStorage.setItem(
+      "toDosStorage",
+      JSON.stringify(
+        toDos.filter((item) => {
+          return e.target.parentElement.parentElement.id != item.id;
+        })
+      )
+    );
+    toDos = JSON.parse(localStorage.getItem("toDosStorage")) || [];
+    renderInUi(JSON.parse(localStorage.getItem("toDosStorage")), toDoContainer);
+  }
 });
 
 function renderInUi(contentArry, container) {
@@ -21,7 +34,7 @@ function renderInUi(contentArry, container) {
   contentArry.forEach((item) => {
     const div = document.createElement("div");
     div.classList.add(
-      "w-[450px]",
+      "w-[35vw]",
       "h-[60px]",
       "toDoShadow",
       "rounded-2xl",
@@ -35,12 +48,11 @@ function renderInUi(contentArry, container) {
    <div class="acpert w-4 h-4 border-solid border-[#72B896] border-[2.5px] rounded-full hover:bg-[#72B896]/50"></div>
    </div>
     <p class="text-[18px] text-[#94ADCF]">${item.title}</p>`;
-
+    div.setAttribute("id", `${item.id}`);
     container.appendChild(div);
   });
 }
-
-function generateUiId() {
+function generateUsrId() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0,
       v = c == "x" ? r : (r & 0x3) | 0x8;
