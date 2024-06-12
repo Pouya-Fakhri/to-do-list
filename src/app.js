@@ -1,6 +1,7 @@
 const toDoForm = document.querySelector("#toDoForm");
 let toDos = JSON.parse(localStorage.getItem("toDosStorage")) || [];
 let toDoContainer = document.querySelector(".toDoContainer");
+
 toDoForm.addEventListener("submit", (e) => {
   const newToDo = {
     title: e.target.toDoInput.value,
@@ -10,22 +11,27 @@ toDoForm.addEventListener("submit", (e) => {
   toDos.push(newToDo);
   localStorage.setItem("toDosStorage", JSON.stringify(toDos));
   e.preventDefault();
-  renderInUi(JSON.parse(localStorage.getItem("toDosStorage")), toDoContainer);
+  renderInUi(toDos, toDoContainer);
   e.target.toDoInput.value = "";
 });
-renderInUi(JSON.parse(localStorage.getItem("toDosStorage")), toDoContainer);
+
+renderInUi(toDos, toDoContainer);
+
 toDoContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("delet")) {
-    localStorage.setItem(
-      "toDosStorage",
-      JSON.stringify(
-        toDos.filter((item) => {
-          return e.target.parentElement.parentElement.id != item.id;
-        })
-      )
-    );
-    toDos = JSON.parse(localStorage.getItem("toDosStorage")) || [];
-    renderInUi(JSON.parse(localStorage.getItem("toDosStorage")), toDoContainer);
+    const todoId = e.target.parentElement.parentElement.id;
+    toDos = toDos.filter((item) => item.id !== todoId);
+    localStorage.setItem("toDosStorage", JSON.stringify(toDos));
+    renderInUi(toDos, toDoContainer);
+  } else if (e.target.classList.contains("acpert")) {
+    const todoId = e.target.parentElement.parentElement.id;
+    const todoIndex = toDos.findIndex((item) => item.id === todoId);
+    if (todoIndex !== -1) {
+      toDos[todoIndex].finished = !toDos[todoIndex].finished;
+      localStorage.setItem("toDosStorage", JSON.stringify(toDos));
+      const todoElement = e.target.parentElement.parentElement;
+      todoElement.classList.toggle("don", toDos[todoIndex].finished);
+    }
   }
 });
 
@@ -52,6 +58,7 @@ function renderInUi(contentArry, container) {
     container.appendChild(div);
   });
 }
+
 function generateUsrId() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0,
